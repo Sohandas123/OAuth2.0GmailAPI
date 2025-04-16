@@ -10,7 +10,7 @@ A Flask-based application for sending end-to-end encrypted emails using Gmail's 
 ```bash
 git clone https://github.com/Sohandas123/OAuth2.0GmailAPI.git
 cd OAuth2.0GmailAPI
-python -m venv venv
+python3 -m venv venv
 source venv/bin/activate  
 pip install -r requirements.txt
 ```
@@ -20,14 +20,25 @@ pip install -r requirements.txt
 
 - Initialize database:
     ```bash
-    python init_db.py
+    python3 database.py
     ```
-- Add recipients' public keys to database
+- Generate public private key pairs:
+    ```bash
+    python3 generate_keys.py
+    ```
+- Add recipients' public keys to database:
+    ```bash
+    python3 add_recipient.py
+    ```
+- Check database:
+    ```bash
+    python3 check_db.py
+    ```
 
 ## Usage
 - To run the application / software:
     ```bash
-    python app.py
+    python3 app.py
     ```
 - Visit `http://localhost:5000` to:
 
