@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Decrypt Files</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script>
+        let attachmentCount = 0;
+        
+        function addAttachmentField() {
+            attachmentCount++;
+            const container = document.getElementById('attachments-container');
+            
+            const group = document.createElement('div');
+            group.className = 'attachment-group';
+            group.innerHTML = `
+                <h3>Attachment ${attachmentCount}</h3>
+                <div class="form-group">
+                    <label>Encrypted File (.enc):</label>
+                    <input type="file" name="attachment_${attachmentCount}_data" required>
+                </div>
+                <div class="form-group">
+                    <label>IV File (.iv):</label>
+                    <input type="file" name="attachment_${attachmentCount}_iv" required>
+                </div>
+                <div class="form-group">
+                    <label>Tag File (.tag):</label>
+                    <input type="file" name="attachment_${attachmentCount}_tag" required>
+                </div>
+            `;
+            container.appendChild(group);
+            document.getElementById('attachment_count').value = attachmentCount;
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Decrypt Files</h1>
+        <form method="post" enctype="multipart/form-data">
+            <input type="hidden" id="attachment_count" name="attachment_count" value="0">
+            
+            <div class="form-group">
+                <label for="private_key">Your Private Key:</label>
+                <input type="file" id="private_key" name="private_key" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="key_file">Encrypted AES Key (key_*.enc):</label>
+                <input type="file" id="key_file" name="key_file" required>
+            </div>
+            
+            <div class="message-section">
+                <h2>Message Files</h2>
+                <div class="form-group">
+                    <label>Encrypted Message (.enc):</label>
+                    <input type="file" name="message_enc">
+                </div>
+                <div class="form-group">
+                    <label>IV File (iv.bin):</label>
+                    <input type="file" name="message_iv">
+                </div>
+                <div class="form-group">
+                    <label>Tag File (tag.bin):</label>
+                    <input type="file" name="message_tag">
+                </div>
+            </div>
+            
+            <div id="attachments-container">
+                <h2>Attachments</h2>
+                <button type="button" class="btn" onclick="addAttachmentField()">
+                    Add Another Attachment
+                </button>
+            </div>
+            
+            <button type="submit" class="btn primary-btn">Decrypt Files</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,12 @@
+venv/
+__pycache__/
+client_secret*.json
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+*.venv
+.DS_Store
+.idea/
+*.sqlite3

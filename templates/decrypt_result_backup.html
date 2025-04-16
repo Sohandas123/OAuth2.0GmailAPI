@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Decryption Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Decryption Results</h1>
+        
+        {% if decrypted_message %}
+        <div class="decrypted-section">
+            <h2>Decrypted Message</h2>
+            <textarea class="decrypted-message" readonly>{{ decrypted_message }}</textarea>
+        </div>
+        {% endif %}
+        
+        {% if decrypted_attachments %}
+        <div class="decrypted-section">
+            <h2>Decrypted Attachments</h2>
+            <ul class="attachment-list">
+                {% for attachment in decrypted_attachments %}
+                <li>
+                    <div class="file-info">
+                        <span class="filename">{{ attachment.filename }}</span>
+                        <div class="download-options">
+                            <input type="text" id="filename_{{ loop.index }}" 
+                                   value="{{ attachment.filename }}"
+                                   placeholder="Enter filename">
+                            <input type="hidden" id="filedata_{{ loop.index }}" value="{{ attachment.data }}">
+                            <button onclick="downloadFile({{ loop.index }})" class="btn download-btn">
+                                Download
+                            </button>
+                        </div>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+        
+        <a href="{{ url_for('decrypt') }}" class="btn">Decrypt Another</a>
+    </div>
+
+<!--     <script>
+        function downloadFile(index, data) {
+            const filename = document.getElementById(`filename_${index}`).value;
+            window.location.href = `/download_decrypted?data=${encodeURIComponent(data)}&filename=${encodeURIComponent(filename)}`;
+        }
+    </script> -->
+    <script>
+    function downloadFile(index) {
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = '/download_decrypted';
+        
+        const filenameInput = document.createElement('input');
+        filenameInput.type = 'hidden';
+        filenameInput.name = 'filename';
+        filenameInput.value = document.getElementById(`filename_${index}`).value;
+        form.appendChild(filenameInput);
+        
+        const dataInput = document.createElement('input');
+        dataInput.type = 'hidden';
+        dataInput.name = 'data';
+        dataInput.value = document.getElementById(`filedata_${index}`).value;
+        form.appendChild(dataInput);
+        
+        document.body.appendChild(form);
+        form.submit();
+    }
+    </script>
+
+</body>
+</html>

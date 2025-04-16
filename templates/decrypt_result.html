@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decryption Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Decryption Results</h1>
+        
+        {% if decrypted_message %}
+        <div class="decrypted-section">
+            <h2>Decrypted Message</h2>
+            <textarea class="decrypted-message" readonly>{{ decrypted_message }}</textarea>
+        </div>
+        {% endif %}
+        
+        {% if decrypted_attachments %}
+        <div class="decrypted-section">
+            <h2>Decrypted Attachments</h2>
+            <ul class="attachment-list">
+                {% for attachment in decrypted_attachments %}
+                <li>
+                    <div class="file-info">
+                        <span class="filename">{{ attachment.filename }}</span>
+                        <div class="download-options">
+                            <input type="text" id="filename_{{ loop.index }}" 
+                                   value="{{ attachment.filename }}"
+                                   placeholder="Enter filename">
+                            <input type="hidden" id="filedata_{{ loop.index }}" value="{{ attachment.data }}">
+                            <button type="button" onclick="downloadFile({{ loop.index }})" class="btn download-btn">
+                                Download
+                            </button>
+                        </div>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+        
+        <a href="{{ url_for('decrypt') }}" class="btn primary-btn">Decrypt Another</a>
+    </div>
+
+    <script>
+    function downloadFile(index) {
+        const filename = document.getElementById(`filename_${index}`).value;
+        const fileData = document.getElementById(`filedata_${index}`).value;
+        
+        if (!fileData) {
+            alert('No file data available');
+            return;
+        }
+
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = '/download_decrypted';
+        form.style.display = 'none';
+        
+        const filenameInput = document.createElement('input');
+        filenameInput.type = 'hidden';
+        filenameInput.name = 'filename';
+        filenameInput.value = filename;
+        form.appendChild(filenameInput);
+        
+        const dataInput = document.createElement('input');
+        dataInput.type = 'hidden';
+        dataInput.name = 'data';
+        dataInput.value = fileData;
+        form.appendChild(dataInput);
+        
+        document.body.appendChild(form);
+        form.submit();
+        
+        // Clean up after submission
+        setTimeout(() => document.body.removeChild(form), 1000);
+    }
+    </script>
+</body>
+</html>

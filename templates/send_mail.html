@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Send Encrypted Email</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Send Encrypted Email</h1>
+        <form method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="to">Recipient Emails (comma separated):</label>
+                <input type="text" id="to" name="to" placeholder="email1@example.com, email2@example.com" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="subject">Subject:</label>
+                <input type="text" id="subject" name="subject" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" required></textarea>
+            </div>
+            
+            <!-- <div class="form-group">
+                <label for="attachment">Attachments (will be encrypted):</label>
+                <input type="file" id="attachment" name="attachment" multiple>
+                <p class="attachment-info">You can attach multiple files (max 25MB total)</p>
+            </div> -->
+            <!-- In send_mail.html -->
+            <div class="form-group">
+                <label for="attachment">Attachments (will be encrypted, max 10MB each):</label>
+                <input type="file" id="attachment" name="attachment" multiple 
+                       accept=".pdf,.doc,.docx,.txt,.jpg,.png" 
+                       data-max-size="10485760"> <!-- 10MB -->
+                <p class="attachment-info">You can attach multiple files (max 10MB each)</p>
+            </div>
+            
+            <button type="submit" class="btn">Send Encrypted Email</button>
+        </form>
+    </div>
+</body>
+</html>

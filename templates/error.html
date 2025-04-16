@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Error</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Error</h1>
+        <div class="error">{{ error }}</div>
+        <a href="{{ url_for(alt_page) }}" class="btn secondary-btn">Go Home</a>
+        <a href="{{ url_for(return_page) }}" class="btn primary-btn">Try Again</a>
+    </div>
+</body>
+</html>

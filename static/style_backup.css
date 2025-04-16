@@ -1,0 +1,164 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 20px;
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+h1 {
+    color: #4285F4;
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+input[type="email"],
+input[type="text"],
+textarea,
+input[type="file"] {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.btn {
+    background-color: #4285F4;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #3367D6;
+}
+
+.attachment-info {
+    font-size: 14px;
+    color: #666;
+    margin-top: 5px;
+}
+
+.success {
+    color: #0F9D58;
+    padding: 10px;
+    background-color: #E6F4EA;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+.error {
+    color: #DB4437;
+    padding: 10px;
+    background-color: #FCE8E6;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+/* Add these to your existing CSS */
+.decrypted-section {
+    margin-bottom: 30px;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+.decrypted-message {
+    width: 100%;
+    min-height: 150px;
+    padding: 10px;
+    padding-right: 0px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-family: monospace;
+}
+
+.attachment-list {
+    list-style: none;
+    padding: 0;
+}
+
+.attachment-list li {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.download-btn {
+    padding: 5px 10px;
+    font-size: 14px;
+}
+
+/* Add these to your existing styles */
+.message-section, .attachment-group {
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border: 1px solid #eee;
+}
+
+.attachment-group {
+    position: relative;
+    padding-top: 40px;
+}
+
+.attachment-group h3 {
+    position: absolute;
+    top: 10px;
+    left: 15px;
+    margin: 0;
+    color: #555;
+}
+
+.primary-btn {
+    background-color: #4285F4;
+    margin-top: 20px;
+}
+
+.download-options {
+    margin-top: 10px;
+}
+
+.download-options input {
+    padding: 5px;
+    margin-right: 10px;
+    width: 60%;
+}
